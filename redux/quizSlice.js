@@ -9,10 +9,6 @@ const initialState = {
 	isGameOver: false,
 };
 
-const shuffleArray = (array) => {
-	return array.sort(() => Math.random() - 0.5);
-};
-
 const quizSlice = createSlice({
 	name: "quiz",
 	initialState,
@@ -32,9 +28,7 @@ const quizSlice = createSlice({
 			else state.isGameOver = true;
 
 			state.currentQuestionIndex = 0;
-      state.correctAnswers = 0;
-      
-      state.shuffledQuestions = shuffleArray([...questions[state.level]]);
+			state.correctAnswers = 0;
 		},
 		restartLevel: (state) => {
 			state.currentQuestionIndex = 0;

@@ -44,7 +44,7 @@ export default function Quiz() {
 
 		if (currentQuestion.type === "text-input") {
 			isCorrect =
-				selectedAnswer.trim().toLowerCase() ===
+				selectedAnswer.replace(/ /g, "").trim().toLowerCase() ===
 				currentQuestion.correctAnswer.toLowerCase();
 		} else {
 			isCorrect = selectedAnswer === currentQuestion.correctAnswer;
@@ -83,7 +83,9 @@ export default function Quiz() {
 			<h2 className="md:text-xl font-bold mb-2 text-center">Level: {level}</h2>
 			{currentQuestion ? (
 				<>
-					<h2 className="md:text-2xl mb-4 text-center">{currentQuestion.question}</h2>
+					<h2 className="md:text-2xl mb-4 text-center">
+						{currentQuestion.question}
+					</h2>
 					{currentQuestion.type === "multiple-choice" && (
 						<div className="flex flex-col">
 							{currentQuestion.options.map((option, index) => (
