@@ -80,7 +80,7 @@ export default function Quiz() {
 					style={{ width: `${progress}%` }}
 				></div>
 			</div>
-			<h2 className="md:text-xl font-bold mb-2 text-center">Difficulty: {level}</h2>
+			<h2 className="md:text-xl font-bold mb-2 text-center">Level: {level}</h2>
 			{currentQuestion ? (
 				<>
 					<h2 className="md:text-2xl mb-4 text-center">{currentQuestion.question}</h2>
