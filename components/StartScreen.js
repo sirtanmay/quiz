@@ -9,7 +9,7 @@ export default function StartScreen() {
 	return (
 		<div className="h-screen flex flex-col justify-center items-center bg-gray-900 text-white">
 			<motion.h1
-				className="text-4xl font-bold mb-6"
+				className="sm:text-4xl text-2xl font-bold mb-6"
 				animate={{ scale: 1.1 }}
 				transition={{ duration: 0.5 }}
 			>

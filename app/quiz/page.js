@@ -73,17 +73,17 @@ export default function Quiz() {
 	};
 
 	return (
-		<div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white">
+		<div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-10">
 			<div className="w-full max-w-md bg-gray-700 rounded-full h-3 mb-4">
 				<div
 					className="bg-blue-500 h-3 rounded-full transition-all"
 					style={{ width: `${progress}%` }}
 				></div>
 			</div>
-			<h2 className="text-xl font-bold mb-2">Difficulty: {level}</h2>
+			<h2 className="md:text-xl font-bold mb-2 text-center">Difficulty: {level}</h2>
 			{currentQuestion ? (
 				<>
-					<h2 className="text-2xl mb-4">{currentQuestion.question}</h2>
+					<h2 className="md:text-2xl mb-4 text-center">{currentQuestion.question}</h2>
 					{currentQuestion.type === "multiple-choice" && (
 						<div className="flex flex-col">
 							{currentQuestion.options.map((option, index) => (
