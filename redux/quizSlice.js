@@ -7,6 +7,9 @@ const initialState = {
 	score: { easy: 0, medium: 0, hard: 0 },
 	correctAnswers: 0,
 	isGameOver: false,
+	selectedAnswer: null,
+	correctAnswer: null,
+	answeredCorrectly: {},
 };
 
 const quizSlice = createSlice({
@@ -14,13 +17,37 @@ const quizSlice = createSlice({
 	initialState,
 	reducers: {
 		answerQuestion: (state, action) => {
-			const { isCorrect } = action.payload;
-			if (isCorrect) {
+			const { selectedAnswer, correctAnswer } = action.payload;
+			state.selectedAnswer = selectedAnswer;
+			state.correctAnswer = correctAnswer;
+
+			const isCorrect =
+				typeof selectedAnswer === "string" && typeof correctAnswer === "string"
+					? selectedAnswer.replace(/  /g, " ").trim().toLowerCase() ===
+					  correctAnswer.replace(/  /g, " ").trim().toLowerCase()
+					: selectedAnswer === correctAnswer;
+
+			const wasAlreadyCorrect =
+				state.answeredCorrectly[state.currentQuestionIndex];
+
+			if (isCorrect && !wasAlreadyCorrect) {
 				state.score[state.level.toLowerCase()] +=
 					state.level === "Easy" ? 10 : state.level === "Medium" ? 20 : 30;
 				state.correctAnswers++;
+				state.answeredCorrectly[state.currentQuestionIndex] = true;
 			}
+		},
+		goToNextQuestion: (state) => {
 			state.currentQuestionIndex++;
+			state.selectedAnswer = null;
+			state.correctAnswer = null;
+		},
+		goToPreviousQuestion: (state) => {
+			if (state.currentQuestionIndex > 0) {
+				state.currentQuestionIndex--;
+				state.selectedAnswer = null;
+				state.correctAnswer = null;
+			}
 		},
 		nextLevel: (state) => {
 			if (state.level === "Easy") state.level = "Medium";
@@ -29,15 +56,23 @@ const quizSlice = createSlice({
 
 			state.currentQuestionIndex = 0;
 			state.correctAnswers = 0;
+			state.answeredCorrectly = {};
 		},
 		restartLevel: (state) => {
 			state.currentQuestionIndex = 0;
 			state.correctAnswers = 0;
+			state.answeredCorrectly = {};
 		},
 		restartGame: () => initialState,
 	},
 });
 
-export const { answerQuestion, nextLevel, restartLevel, restartGame } =
-	quizSlice.actions;
+export const {
+	answerQuestion,
+	goToNextQuestion,
+	goToPreviousQuestion,
+	nextLevel,
+	restartLevel,
+	restartGame,
+} = quizSlice.actions;
 export default quizSlice.reducer;
