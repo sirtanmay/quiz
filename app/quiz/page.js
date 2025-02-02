@@ -14,6 +14,7 @@ export default function Quiz() {
 	const [selectedAnswer, setSelectedAnswer] = useState("");
 	const [showFeedback, setShowFeedback] = useState(false);
 	const [feedbackMessage, setFeedbackMessage] = useState("");
+	const [isSubmitted, setIsSubmitted] = useState(false);
 
 	useEffect(() => {
 		if (isGameOver) {
@@ -23,6 +24,7 @@ export default function Quiz() {
 
 	useEffect(() => {
 		setSelectedAnswer("");
+		setIsSubmitted(false);
 	}, [currentQuestionIndex]);
 
 	const currentQuestions = questions[level];
@@ -38,7 +40,9 @@ export default function Quiz() {
 	const progress = (totalAnsweredQuestions / totalQuestions) * 100;
 
 	const handleSubmit = () => {
-		if (!currentQuestion) return;
+		if (!currentQuestion || isSubmitted) return;
+
+		setIsSubmitted(true);
 
 		let isCorrect = false;
 
@@ -69,6 +73,7 @@ export default function Quiz() {
 					dispatch(restartLevel());
 				}
 			}
+			setIsSubmitted(false);
 		}, 1000);
 	};
 
@@ -147,6 +152,7 @@ export default function Quiz() {
 			)}
 
 			<button
+				disabled={isSubmitted}
 				onClick={handleSubmit}
 				className="mt-6 px-6 py-2 bg-green-600 rounded-lg"
 			>
