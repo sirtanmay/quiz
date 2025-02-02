@@ -200,19 +200,21 @@ export default function Quiz() {
 						)}
 					</div>
 
-					{isSubmitted && (
-						<p
-							className={`text-lg font-semibold ${
-								selectedAnswer?.toLowerCase() === correctAnswer?.toLowerCase()
-									? "text-green-400"
-									: "text-red-400"
-							}`}
-						>
-							{selectedAnswer?.toLowerCase() === correctAnswer?.toLowerCase()
-								? "Correct!"
-								: `Incorrect! Correct Answer: ${correctAnswer}`}
-						</p>
-					)}
+					<div className="relative">
+						{isSubmitted && (
+							<p
+								className={`absolute top-full left-1/2 transform -translate-x-1/2 text-lg font-semibold whitespace-nowrap ${
+									selectedAnswer?.toLowerCase() === correctAnswer?.toLowerCase()
+										? "text-green-400"
+										: "text-red-400"
+								}`}
+							>
+								{selectedAnswer?.toLowerCase() === correctAnswer?.toLowerCase()
+									? "Correct!"
+									: `Incorrect! Correct Answer: ${correctAnswer}`}
+							</p>
+						)}
+					</div>
 				</>
 			) : (
 				<h2 className="text-xl font-bold">No more questions available</h2>
