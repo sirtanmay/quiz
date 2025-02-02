@@ -7,7 +7,7 @@ export default function StartScreen() {
 	const router = useRouter();
 
 	return (
-		<div className="h-screen flex flex-col justify-center items-center bg-gray-900 text-white">
+		<div className="h-screen flex flex-col justify-center items-center bg-gradient-to-r from-slate-900 to-slate-700 text-white">
 			<motion.h1
 				className="sm:text-4xl text-2xl font-bold mb-6"
 				animate={{ scale: 1.1 }}

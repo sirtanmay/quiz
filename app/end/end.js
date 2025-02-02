@@ -10,11 +10,11 @@ export default function EndScreen() {
 	const router = useRouter();
 
 	return (
-		<div className="h-screen flex flex-col justify-center items-center bg-gray-900 text-white">
+		<div className="h-screen flex flex-col justify-center items-center bg-gradient-to-r from-slate-900 to-slate-700 text-white">
 			<h1 className="md:text-3xl text-2xl font-bold mb-4">Quiz Completed!</h1>
-			<p className="text-lg">Easy: {score.easy} points</p>
-			<p className="text-lg">Medium: {score.medium} points</p>
-			<p className="text-lg">Hard: {score.hard} points</p>
+			<p className="text-lg">Easy: {score.easy} / 30 points</p>
+			<p className="text-lg">Medium: {score.medium} / 60 points</p>
+			<p className="text-lg">Hard: {score.hard} / 90 points</p>
 			<h2 className="text-center md:text-2xl font-bold m-4">
 				Total Score: {score.easy + score.medium + score.hard} / 180 points!
 			</h2>

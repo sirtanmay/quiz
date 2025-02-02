@@ -45,6 +45,16 @@ export default function Quiz() {
 	const currentQuestions = questions[level];
 	const currentQuestion = currentQuestions[currentQuestionIndex];
 
+	const totalQuestions = Object.values(questions).flat().length;
+	const totalAnsweredQuestions =
+		Object.keys(questions)
+			.slice(0, Object.keys(questions).indexOf(level))
+			.reduce((acc, key) => acc + questions[key].length, 0) +
+		currentQuestionIndex +
+		1;
+
+	const progress = (totalAnsweredQuestions / totalQuestions) * 100;
+
 	const handleSubmit = () => {
 		if (!currentQuestion || isSubmitted) return;
 		setIsSubmitted(true);
@@ -91,7 +101,13 @@ export default function Quiz() {
 	};
 
 	return (
-		<div className="h-screen flex flex-col items-center justify-center bg-gray-900 text-white p-10">
+		<div className="h-screen flex flex-col items-center justify-center bg-gradient-to-r from-slate-900 to-slate-700 text-white p-10">
+			<div className="w-full max-w-md bg-gray-700 rounded-full h-3 mb-4">
+				<div
+					className="bg-blue-500 h-3 rounded-full transition-all"
+					style={{ width: `${progress}%` }}
+				></div>
+			</div>
 			<h2 className="md:text-xl font-bold mb-2 text-center">Level: {level}</h2>
 
 			{currentQuestion ? (
